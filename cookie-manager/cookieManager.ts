@@ -2,14 +2,14 @@ class CookieManager {
   private static myInstance: CookieManager | null = null;
   private constructor() {}
 
-  static getSingeltonInstance(): CookieManager {
+  public static getSingeltonInstance(): CookieManager {
     if (!CookieManager.myInstance) {
       CookieManager.myInstance = new CookieManager();
     }
     return CookieManager.myInstance;
   }
 
-  static setCookie(name: string, value: string, daysToLive?: number): void {
+  public setCookie(name: string, value: string, daysToLive?: number): void {
     let expires = "";
     if (daysToLive !== undefined) {
       const date = new Date();
@@ -19,7 +19,7 @@ class CookieManager {
     document.cookie = `${name}=${encodeURIComponent(value)}${expires}; path=/`;
   }
 
-  static getCookie(name: string): string | null {
+  public getCookie(name: string): string | null {
     const cookieDecode: string = decodeURIComponent(document.cookie);
     const cookieArray: string[] = cookieDecode.split(";");
     let result: string = "";
@@ -32,11 +32,11 @@ class CookieManager {
     return result;
   }
 
-  static deleteCookie(name: string): void {
+  public deleteCookie(name: string): void {
     this.setCookie(name, "", 0);
   }
 
-  static getAllCookies(): Record<string, string> {
+  public getAllCookies(): Record<string, string> {
     const cookies: Record<string, string> = {};
     document.cookie.split(";").forEach((cookieStr) => {
       const [key, value] = cookieStr.trim().split("=");
