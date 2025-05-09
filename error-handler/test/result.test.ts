@@ -14,7 +14,7 @@ describe('Result and Handlers', () => {
     onLoading(initialResult, () => {
       loadingCalled = true;
     });
-    assert.equal(loadingCalled, true);
+    assert.strictEqual(loadingCalled, true);
   });
 
   it('should handle success state', () => {
@@ -23,7 +23,7 @@ describe('Result and Handlers', () => {
     onSuccess(result, (data) => {
       successValue = data;
     });
-    assert.equal(successValue, 42);
+    assert.strictEqual(successValue, 42);
   });
 
   it('should handle failure state', () => {
@@ -33,7 +33,7 @@ describe('Result and Handlers', () => {
     onError(result, (err) => {
       errorValue = err;
     });
-    assert.equal(errorValue, error);
+    assert.strictEqual(errorValue, error);
   });
 
   it('should handle loading -> error', () => {
@@ -43,14 +43,14 @@ describe('Result and Handlers', () => {
     let errorObj = new Error('network');
     let result: Result<number> = createLoading();
     onLoading(result, () => { loadingCalled = true; });
-    assert.equal(loadingCalled, true);
+    assert.strictEqual(loadingCalled, true);
 
     result = createFailure(errorObj);
     onError(result, (err) => { 
       errorCalled = true;
       assert.equal(err, errorObj);
     });
-    assert.equal(errorCalled, true);
+    assert.strictEqual(errorCalled, true);
   });
 
   it('should handle loading -> success', () => {
