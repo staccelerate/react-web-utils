@@ -3,6 +3,12 @@ export type Result<T, E = Error> =
   | { state: 'failure'; error: E }
   | { state: 'loading' };
 
+export enum ResultState {
+  Success = 'success',
+  Failure = 'failure',
+  Loading = 'loading',
+}  
+
 export const createSuccess = <T>(data: T): Result<T, never> => ({
   state: 'success',
   data
