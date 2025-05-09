@@ -19,7 +19,7 @@ describe('Result and Handlers', () => {
 
   it('should handle success state', () => {
     const result: Result<number> = createSuccess(42);
-    let successValue: number | null = null;
+    let successValue!: number;
     onSuccess(result, (data) => {
       successValue = data;
     });
