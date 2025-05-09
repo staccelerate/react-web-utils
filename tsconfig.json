@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "target": "ES2019",
+      "module": "CommonJS",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "outDir": "./dist",
+      "moduleResolution": "node",
+      "resolveJsonModule": true
+    },
+    "include": [
+      //"error-handler/**/*.ts"
+      "validators/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules",
+      "dist"
+    ]
+}  
