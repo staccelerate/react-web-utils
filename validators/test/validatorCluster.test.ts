@@ -44,9 +44,8 @@ describe('ValidatorCluster', () => {
         new EmailValidator(),
       ]);
 
-      const result = cluster.validate('user@example.com');
-      expect(result.isValid).to.be.true;
-      expect(result.errors).to.be.empty;
+      const errors = cluster.validate('user@example.com');
+      expect(errors).to.be.empty;
     });
 
     it('should fail when any validator fails', () => {
@@ -57,11 +56,10 @@ describe('ValidatorCluster', () => {
       ]);
 
       const email = 'user@example.com';
-      const result = cluster.validate(email);
+      const errors = cluster.validate(email);
 
-      expect(result.isValid).to.be.false;
-      expect(result.errors).to.have.length(1);
-      expect(result.errors[0].validatorName).to.equal('minLength');
+      expect(errors).to.have.length(1);
+      expect(errors[0].validatorName).to.equal('minLength');
     });
 
     it('should return multiple errors when multiple validators fail', () => {
@@ -72,11 +70,10 @@ describe('ValidatorCluster', () => {
       ]);
 
       const value = 'not-email';
-      const result = cluster.validate(value);
+      const errors = cluster.validate(value);
 
-      expect(result.isValid).to.be.false;
-      expect(result.errors).to.have.length(2);
-      const errorNames = result.errors.map(e => e.validatorName);
+      expect(errors).to.have.length(2);
+      const errorNames = errors.map(e => e.validatorName);
       expect(errorNames).to.include('email');
       expect(errorNames).to.include('minLength');
     });

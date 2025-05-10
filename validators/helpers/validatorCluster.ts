@@ -1,10 +1,5 @@
 import { Validator, ValidationResult } from '../types/validator';
 
-export interface ClusterValidationResult {
-  isValid: boolean;
-  errors: ValidationResult[];
-}
-
 export class ValidatorCluster<T> {
   private validators: Validator<T>[] = [];
   private name: string;
@@ -34,17 +29,10 @@ export class ValidatorCluster<T> {
     return [...this.validators];
   }
 
-  validate(value: T): ClusterValidationResult {
-    const results = this.validators.map(validator => 
-      validator.validateWithResult(value)
-    );
-
-    const errors = results.filter(result => !result.isValid);
-
-    return {
-      isValid: errors.length === 0,
-      errors
-    };
+  validate(value: T): ValidationResult[] {
+    return this.validators
+      .map(validator => validator.validateWithResult(value))
+      .filter(result => !result.isValid);
   }
 
   getName(): string {
