@@ -1,4 +1,4 @@
-import { Validator } from './validator';
+import { Validator } from '../types/validator';
 
 export class RequiredValidator extends Validator<any> {
   constructor(name: string = 'required', errorMessage: string = 'This field is required') {
